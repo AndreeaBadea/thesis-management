@@ -1,0 +1,61 @@
+--CREATE SCHEMA `thesis-management`;
+--
+--CREATE TABLE `thesis-management`.`teachers` (
+--  `id_teacher` INT NOT NULL AUTO_INCREMENT,
+--  `first_name` VARCHAR(45) NOT NULL,
+--  `last_name` VARCHAR(45) NOT NULL,
+--  `email` VARCHAR(45) NOT NULL,
+--  `cnp` VARCHAR(45) NULL,
+--  `number_of_students` INT NULL,
+--  PRIMARY KEY (`id_teacher`),
+--  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+--  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC) VISIBLE);
+--
+--
+--CREATE TABLE `thesis-management`.`projects` (
+--  `id_project` INT NOT NULL AUTO_INCREMENT,
+--  `project_title` VARCHAR(45) NOT NULL,
+--  `project_description` VARCHAR(45) NOT NULL,
+--  `project_availability` TINYINT NOT NULL,
+--  `id_teacher` INT NULL,
+--  PRIMARY KEY (`id_project`),
+--  INDEX `fk_id_teacher_idx` (`id_teacher` ASC) VISIBLE,
+--  CONSTRAINT `fk_id_teacher`
+--    FOREIGN KEY (`id_teacher`)
+--    REFERENCES `thesis-management`.`teachers` (`id_teacher`)
+--    ON DELETE NO ACTION
+--    ON UPDATE NO ACTION);
+--
+--CREATE TABLE `thesis-management`.`students` (
+--  `id_student` INT NOT NULL AUTO_INCREMENT,
+--  `first_name` VARCHAR(45) NOT NULL,
+--  `last_name` VARCHAR(45) NOT NULL,
+--  `email` VARCHAR(45) NOT NULL,
+--  `cnp` VARCHAR(45) NULL,
+--  PRIMARY KEY (`id_student`),
+--  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+--  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC) VISIBLE);
+--
+
+
+--CREATE TABLE `thesis-management`.`students_projects` (
+--  `id_student_project` INT NOT NULL AUTO_INCREMENT,
+--  `id_student` INT NOT NULL,
+--  `id_project` INT NOT NULL,
+--  PRIMARY KEY (`id_student_project`));
+--
+--ALTER TABLE `thesis-management`.`students_projects`
+--ADD INDEX `fk_id_student_idx` (`id_student` ASC) VISIBLE,
+--ADD INDEX `fk_id_project_idx` (`id_project` ASC) VISIBLE;
+--;
+--ALTER TABLE `thesis-management`.`students_projects`
+--ADD CONSTRAINT `fk_id_student`
+--  FOREIGN KEY (`id_student`)
+--  REFERENCES `thesis-management`.`students` (`id_student`)
+--  ON DELETE NO ACTION
+--  ON UPDATE NO ACTION,
+--ADD CONSTRAINT `fk_id_project`
+--  FOREIGN KEY (`id_project`)
+--  REFERENCES `thesis-management`.`projects` (`id_project`)
+--  ON DELETE NO ACTION
+--  ON UPDATE NO ACTION;
