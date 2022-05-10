@@ -1,9 +1,16 @@
 package com.campgemini.thesismanagement.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "users_accounts")
 public class UserAccount {
 
