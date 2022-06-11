@@ -38,7 +38,7 @@ public class StudentControllerTests {
 
     @Test
     void shouldCreateStudent() throws Exception {
-        Student student = new Student(1, "StudentSurname", "StudentName", "student.email@gmail.com", "60020", null);
+        Student student = new Student(1, "StudentSurname", "StudentName", "60020", null);
         mockMvc.perform(
                         post("/students")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +50,7 @@ public class StudentControllerTests {
     @Test
     void shouldReturnTeacherById() throws Exception {
         int id = 1;
-        Student student = new Student(1, "StudentSurname", "StudentName", "student.email@gmail.com", "60020", null);
+        Student student = new Student(1, "StudentSurname", "StudentName", "60020", null);
         when(studentRepository.findById(id)).thenReturn(Optional.of(student));
         mockMvc.perform(get("/students/{id}", id)).andExpect(status().isOk())
                 .andDo(print());

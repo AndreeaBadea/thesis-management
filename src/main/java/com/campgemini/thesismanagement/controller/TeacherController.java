@@ -56,6 +56,11 @@ public class TeacherController {
         return new ResponseEntity<ProjectDto>(teacherService.updateTeacherProject(id, idProject, projectDto), HttpStatus.OK);
     }
 
+    @GetMapping("/greeting")
+    public String getTeacher(){
+        return "Welcome!";
+    }
+
 
 
 }

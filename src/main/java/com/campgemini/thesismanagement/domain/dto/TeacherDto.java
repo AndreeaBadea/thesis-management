@@ -15,7 +15,7 @@ public class TeacherDto {
     private Integer idTeacher;
     private String firstName;
     private String lastName;
-    private String email;
+  //  private String email;
     private String CNP;
     private Integer numberOfStudents;
 

@@ -31,7 +31,7 @@ public class ProjectDto {
 
     private String projectDescription;
 
-    private Boolean projectAvailability;
+    private String projectAvailability;
 
 
 
