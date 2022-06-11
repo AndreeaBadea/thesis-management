@@ -24,10 +24,6 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
 
-    @Email
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "cnp")
     private String CNP;
 

@@ -66,14 +66,15 @@ public class TeacherService {
                 .collect(Collectors.toList());
     }
 
-    public ProjectDto updateTeacherProject(Integer idTeacher, Integer idProject, ProjectDto projectDto){ ///?
+    public ProjectDto updateTeacherProject(Integer idTeacher, Integer idProject, ProjectDto projectDto){
         Project existingProject = projectRepository.getById(idProject);
-        existingProject.setTeacher(projectDto.getTeacher());
+       // existingProject.setTeacher(projectDto.getTeacher());
+        existingProject.setTeacher(teacherRepository.getById(idTeacher));
         existingProject.setStudentProject(projectDto.getStudentProject());
         existingProject.setProjectTitle(projectDto.getProjectTitle());
         existingProject.setProjectDescription(projectDto.getProjectDescription());
         existingProject.setProjectAvailability(projectDto.getProjectAvailability());
-        Project newProject = projectRepository.save(ProjectMapper.projectDtoToProject(projectDto));
+        Project newProject = projectRepository.save(existingProject);
         Logger.info("Project id {} updated.", idProject);
         return ProjectMapper.projectToProjectDto(newProject);
     }

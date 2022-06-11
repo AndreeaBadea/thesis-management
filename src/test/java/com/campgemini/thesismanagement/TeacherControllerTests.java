@@ -42,7 +42,7 @@ public class TeacherControllerTests {
 
     @Test
     void shouldCreateTeacher() throws Exception {
-        Teacher teacher = new Teacher(1, "TeacherSurname", "TeacherName", "teacher.email@gmail.com", "60024820", 3, null);
+        Teacher teacher = new Teacher(1, "TeacherSurname", "TeacherName", "60024820", 3, null);
         mockMvc.perform(
                         post("/teachers")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -55,7 +55,7 @@ public class TeacherControllerTests {
     @Test
     void shouldReturnTeacherById() throws Exception {
         int id = 2;
-        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "teacher.email@gmail.com", "60024820", 3, null);
+        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "60024820", 3, null);
         when(teacherRepository.findById(id)).thenReturn(Optional.of(teacher));
         mockMvc.perform(get("/teachers/{id}", id)).andExpect(status().isOk())
                 .andDo(print());
@@ -64,8 +64,8 @@ public class TeacherControllerTests {
     @Test
     void shouldReturnListOfTeachers() throws Exception {
         List<Teacher> teachersList = new ArrayList<>(
-                Arrays.asList(new Teacher(2, "TeacherSurname1", "TeacherName1", "teacher.email@gmail.com", "60024820", 3, null),
-                        new Teacher(3, "TeacherSurname2", "TeacherName2", "teacher.email@gmail.com", "60340", 2, null)
+                Arrays.asList(new Teacher(2, "TeacherSurname1", "TeacherName1", "60024820", 3, null),
+                        new Teacher(3, "TeacherSurname2", "TeacherName2", "60340", 2, null)
                         ));
         when(teacherRepository.findAll()).thenReturn(teachersList);
         mockMvc.perform(get("/teachers"))
@@ -76,8 +76,8 @@ public class TeacherControllerTests {
     @Test
     void shouldCreateProject() throws Exception {
         int id = 2;
-        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "teacher.email@gmail.com", "60024820", 3, null);
-        Project project = new Project(1, null, null, "Project Title", "Project Description", true);
+        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "60024820", 3, null);
+        Project project = new Project(1, null, null, "Project Title", "Project Description", "available");
         when(teacherService.findTeacherById(id)).thenReturn(TeacherMapper.teacherToTeacherDto(teacher));
         mockMvc.perform(post("/teachers/{id}/projects", id)
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -89,8 +89,8 @@ public class TeacherControllerTests {
     @Test
     void shouldReturnAllTeacherProjects() throws Exception {
         int id = 2;
-        Project project = new Project(1, null, null, "Project Title", "Project Description", true);
-        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "teacher.email@gmail.com", "60024820", 3, List.of(project));
+        Project project = new Project(1, null, null, "Project Title", "Project Description", "available");
+        Teacher teacher = new Teacher(2, "TeacherSurname", "TeacherName", "60024820", 3, List.of(project));
         when(teacherRepository.findById(id)).thenReturn(Optional.of(teacher));
         mockMvc.perform(get("/teachers/{id}/project", id)).andExpect(status().isOk())
                 .andDo(print());

@@ -1,5 +1,6 @@
 package com.campgemini.thesismanagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,23 +24,21 @@ public class UserAccount {
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "enabled")
-    private Boolean enabled;
+//    @Column(name = "enabled")
+//    private Boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "id_user_account"),
-            inverseJoinColumns = @JoinColumn(name = "id_role")
-    )
-    private Set<Role> roles = new HashSet<>();
-
-
-
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(name = "id_user_account"),
+//            inverseJoinColumns = @JoinColumn(name = "id_role")
+//    )
+//    private Set<Role> roles = new HashSet<>();
 
 }

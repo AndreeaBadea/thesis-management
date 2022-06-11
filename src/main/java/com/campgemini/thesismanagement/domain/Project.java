@@ -35,5 +35,6 @@ public class Project {
     private String projectDescription;
 
     @Column(name = "project_availability")
-    private Boolean projectAvailability;
+    private String projectAvailability;
+
 }
