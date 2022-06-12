@@ -20,6 +20,10 @@ public class Teacher {
     @Column(name = "id_teacher")
     private Integer idTeacher;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_account")
+    private UserAccount id_user_account;
+
     @Column(name = "first_name")
     private String firstName;
 

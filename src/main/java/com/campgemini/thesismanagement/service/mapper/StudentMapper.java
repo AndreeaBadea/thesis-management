@@ -1,35 +1,41 @@
 package com.campgemini.thesismanagement.service.mapper;
 
 import com.campgemini.thesismanagement.domain.Student;
+import com.campgemini.thesismanagement.domain.UserAccount;
 import com.campgemini.thesismanagement.domain.dto.StudentDto;
 import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
+import com.campgemini.thesismanagement.repository.UserAccountRepository;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
 public class StudentMapper {
 
+    @Autowired
+    public static UserAccountRepository userAccountRepository;
+
     public static StudentDto studentToStudentDto (Student student){
         StudentDto studentDTO = new StudentDto();
         studentDTO.setIdStudent(student.getIdStudent());
+        studentDTO.setIdUserAccount(student.getUserAccount().getIdUserAccount());
         studentDTO.setFirstName(student.getFirstName());
         studentDTO.setLastName(student.getLastName());
-       // studentDTO.setEmail(student.getEmail());
         studentDTO.setCNP(student.getCNP());
-        //studentDTO.setStudentProject(student.getStudentProject());
-        //studentDTO.setIdStudentProject(student.getStudentProject().getIdStudentProject());
         return studentDTO;
     }
 
     public static Student studentDtoToStudent(StudentDto studentDto){
         Student student = new Student();
         student.setIdStudent(studentDto.getIdStudent());
+        student.setUserAccount(studentDto.getUserAccount());
+        student.setIdUserAccount(studentDto.getIdUserAccount());
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
-     //   student.setEmail(studentDto.getEmail());
         student.setCNP(studentDto.getCNP());
-       // student.setProject(studentDto.getProject());
         return student;
     }
 }

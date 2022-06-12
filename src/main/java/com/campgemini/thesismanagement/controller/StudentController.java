@@ -34,8 +34,12 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> saveStudent(@Valid @RequestBody StudentDto studentDto){
-        return new ResponseEntity<>(studentService.addStudent(studentDto), HttpStatus.CREATED);
+    public ResponseEntity<StudentDto> saveStudent(@RequestParam Integer idUserAccount, @Valid @RequestBody StudentDto studentDto){
+        System.out.println(studentDto.getIdUserAccount());
+        System.out.println(studentDto.getCNP());
+        System.out.println(studentDto.getFirstName());
+        System.out.println(studentDto.getLastName());
+        return new ResponseEntity<>(studentService.addStudent(idUserAccount, studentDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/{idStudent}/projects/{idProject}")

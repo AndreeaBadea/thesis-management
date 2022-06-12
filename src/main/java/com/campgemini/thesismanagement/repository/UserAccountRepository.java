@@ -8,4 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Repository
 public interface UserAccountRepository extends CrudRepository<UserAccount, Integer> {
     UserAccount findByUsername(String username);
+
+    UserAccount getByIdUserAccount(Integer idUserAccount);
 }

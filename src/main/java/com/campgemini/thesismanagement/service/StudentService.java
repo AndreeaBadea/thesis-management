@@ -7,6 +7,7 @@ import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
 import com.campgemini.thesismanagement.repository.ProjectRepository;
 import com.campgemini.thesismanagement.repository.StudentProjectRepository;
 import com.campgemini.thesismanagement.repository.StudentRepository;
+import com.campgemini.thesismanagement.repository.UserAccountRepository;
 import com.campgemini.thesismanagement.service.mapper.StudentMapper;
 import com.campgemini.thesismanagement.service.mapper.StudentProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,16 @@ public class StudentService {
     private final StudentProjectRepository studentProjectRepository;
 
     @Autowired
+    private final UserAccountRepository userAccountRepository;
+
+    @Autowired
     private final ProjectService projectService;
 
-    public StudentService(StudentRepository studentRepository, ProjectRepository projectRepository, StudentProjectRepository studentProjectRepository, ProjectService projectService) {
+    public StudentService(StudentRepository studentRepository, ProjectRepository projectRepository, StudentProjectRepository studentProjectRepository, UserAccountRepository userAccountRepository, ProjectService projectService) {
         this.studentRepository = studentRepository;
         this.projectRepository = projectRepository;
         this.studentProjectRepository = studentProjectRepository;
+        this.userAccountRepository = userAccountRepository;
         this.projectService = projectService;
     }
 
@@ -48,7 +53,9 @@ public class StudentService {
         return StudentMapper.studentToStudentDto(studentRepository.getById(id));
     }
 
-    public StudentDto addStudent(StudentDto studentDto){
+    public StudentDto addStudent(Integer idUserAccount, StudentDto studentDto){
+        studentDto.setUserAccount(userAccountRepository.getByIdUserAccount(idUserAccount));
+        studentDto.setIdUserAccount(idUserAccount);
         Student student = studentRepository.save(StudentMapper.studentDtoToStudent(studentDto));
         return StudentMapper.studentToStudentDto(student);
     }
