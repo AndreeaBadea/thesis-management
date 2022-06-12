@@ -1,11 +1,15 @@
 package com.campgemini.thesismanagement.domain;
 
+import com.campgemini.thesismanagement.domain.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Email;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +21,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_student")
     private Integer idStudent;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_account")
+    private UserAccount userAccount;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,5 +38,8 @@ public class Student {
     @OneToOne(mappedBy = "student" )
     private StudentProject studentProject;
 
+    public void setIdUserAccount(Integer id){
+        userAccount.setIdUserAccount(id);
+    }
 
 }
