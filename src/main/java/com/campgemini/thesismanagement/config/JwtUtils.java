@@ -1,5 +1,6 @@
 package com.campgemini.thesismanagement.config;
 
+import com.campgemini.thesismanagement.service.UserDetailsImplementation;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.tinylog.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -15,7 +17,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtTokenUtil implements Serializable {
+public class JwtUtils implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
 
@@ -52,13 +54,9 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public String generateToken(Authentication authentication) {
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
+        UserDetailsImplementation userPrincipal = (UserDetailsImplementation) authentication.getPrincipal();
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY, authorities)
+                .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY*1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
@@ -66,9 +64,22 @@ public class JwtTokenUtil implements Serializable {
     }
 
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public boolean isTokenValid(String authToken) {
+        try {
+            Jwts.parser().setSigningKey(SIGNING_KEY).parseClaimsJws(authToken);
+            return true;
+        } catch (SignatureException e) {
+            Logger.error("Invalid JWT signature: {}", e.getMessage());
+        } catch (MalformedJwtException e) {
+            Logger.error("Invalid JWT token: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            Logger.error("JWT token is expired: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            Logger.error("JWT token is unsupported: {}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            Logger.error("JWT claims string is empty: {}", e.getMessage());
+        }
+        return false;
     }
 
     UsernamePasswordAuthenticationToken getAuthenticationToken(final String token, final Authentication existingAuth, final UserDetails userDetails) {

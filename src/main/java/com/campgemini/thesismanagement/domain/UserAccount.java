@@ -6,13 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "users_accounts")
+@Entity
+@Table(name = "users_accounts")
 public class UserAccount {
 
     @Id
@@ -27,6 +30,7 @@ public class UserAccount {
     @JsonIgnore
     private String password;
 
+    @Email
     @Column(name = "email")
     private String email;
 
@@ -38,4 +42,10 @@ public class UserAccount {
     )
     private Set<Role> roles = new HashSet<>();
 
+    public UserAccount(String username, String email, String encode) {
+    }
+
+    public static Set<String> getRoles(UserAccount userAccount){
+        return userAccount.getRoles().stream().map(role -> role.getRoleName().name()).collect(Collectors.toSet());
+    }
 }

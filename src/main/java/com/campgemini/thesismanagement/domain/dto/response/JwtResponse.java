@@ -1,8 +1,6 @@
-package com.campgemini.thesismanagement.domain;
+package com.campgemini.thesismanagement.domain.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 

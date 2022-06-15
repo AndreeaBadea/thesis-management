@@ -1,4 +1,4 @@
-package com.campgemini.thesismanagement.domain;
+package com.campgemini.thesismanagement.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtRequest implements Serializable {
+public class AuthRequest implements Serializable {
     private static final long serialVersionUID = 5926468583005150707L;
 
     private String username;
