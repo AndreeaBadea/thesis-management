@@ -1,6 +1,7 @@
 package com.campgemini.thesismanagement.service;
 
 import com.campgemini.thesismanagement.domain.Student;
+import com.campgemini.thesismanagement.domain.StudentDetailsDto;
 import com.campgemini.thesismanagement.domain.StudentProject;
 import com.campgemini.thesismanagement.domain.dto.StudentDto;
 import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,5 +72,27 @@ public class StudentService {
         return StudentProjectMapper.toStudentProjectDto(studentProject);
     }
 
+//    public List<StudentDetailsDto> findAllStudentsDetails(){
+//      //  StudentDetailsDto studentDetailsDto = new StudentDetailsDto();
+//        return studentProjectRepository.findAll()
+//                .stream()
+//                .map(StudentProjectMapper::studentToStudentDetailsDto)
+//                .collect(Collectors.toList());
+//
+//        findAllStudentsDetails()
+//
+//    }
 
-}
+
+
+    public boolean checkThesisStatus(Integer idStudent){
+        Optional<StudentProject> currentStudent = studentProjectRepository.findById(idStudent);
+        if(currentStudent.isPresent()){
+            return true;
+        }
+        return false;
+        }
+    }
+
+
+

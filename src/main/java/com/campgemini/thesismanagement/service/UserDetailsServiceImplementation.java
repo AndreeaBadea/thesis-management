@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.tinylog.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,7 +39,6 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     }
 
     public Boolean checkIfEmailExist(String email){
-        System.out.println("aiiici");
         if(userAccountRepository.existsByEmail(email)){
             return true;
         }
@@ -46,7 +46,6 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     }
 
     public Boolean checkIfUsernameExist(String username) {
-        System.out.println("aooooooooooooo");
         if (userAccountRepository.existsByUsername(username)) {
             return true;
         }
@@ -91,6 +90,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 //            });
 
         userAccount.setRoles(roles);
+        userAccount.setCreatedAt(LocalDateTime.now());
         userAccountRepository.save((userAccount));
         Logger.info("User registered successfully!");
         return UserAccountMapper.userAccountToUserAccountDto(userAccount);

@@ -35,11 +35,24 @@ public class Student {
     @Column(name = "cnp")
     private String CNP;
 
+    @Column(name = "faculty")
+    private String faculty;
+
+    @Column(name = "faculty_domain")
+    private String facultyDomain;
+
+    @Column(name = "classroom")
+    private String classroom;
+
     @OneToOne(mappedBy = "student" )
     private StudentProject studentProject;
 
     public void setIdUserAccount(Integer id){
         userAccount.setIdUserAccount(id);
+    }
+
+    public void setEmail(String email){
+        userAccount.setEmail(email);
     }
 
 }

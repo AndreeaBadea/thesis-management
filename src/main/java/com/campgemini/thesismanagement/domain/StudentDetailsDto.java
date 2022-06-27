@@ -1,16 +1,14 @@
-package com.campgemini.thesismanagement.domain.dto;
+package com.campgemini.thesismanagement.domain;
 
-import com.campgemini.thesismanagement.domain.StudentProject;
-import com.campgemini.thesismanagement.domain.UserAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class StudentDto {
+@NoArgsConstructor
+public class StudentDetailsDto {
 
     private Integer idStudent;
 
@@ -19,11 +17,11 @@ public class StudentDto {
 
     private Integer idUserAccount;
 
+    private String email;
+
     private String firstName;
 
     private String lastName;
-
-    private String CNP;
 
     private String faculty;
 
@@ -36,5 +34,6 @@ public class StudentDto {
 
     private Integer idStudentProject;
 
+    private String status;
 
 }

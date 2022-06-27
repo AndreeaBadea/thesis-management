@@ -25,6 +25,9 @@ public class StudentMapper {
         studentDTO.setFirstName(student.getFirstName());
         studentDTO.setLastName(student.getLastName());
         studentDTO.setCNP(student.getCNP());
+        studentDTO.setFaculty(student.getFaculty());
+        studentDTO.setFacultyDomain(student.getFacultyDomain());
+        studentDTO.setClassroom(student.getClassroom());
         return studentDTO;
     }
 
@@ -36,6 +39,9 @@ public class StudentMapper {
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
         student.setCNP(studentDto.getCNP());
+        student.setFaculty(studentDto.getFaculty());
+        student.setFacultyDomain(studentDto.getFacultyDomain());
+        student.setClassroom(studentDto.getClassroom());
         return student;
     }
 }

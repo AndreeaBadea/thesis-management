@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins ="http://localhost:4200")
 @RestController
+@CrossOrigin(value = "https://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/students")
 public class StudentController {
 
@@ -34,9 +34,8 @@ public class StudentController {
         return new ResponseEntity<>(studentService.findStudentById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<StudentDto> saveStudent(@RequestParam Integer idUserAccount, @Valid @RequestBody StudentDto studentDto){
-        System.out.println(studentDto.getIdUserAccount());
+    @PostMapping("/{idUserAccount}")
+    public ResponseEntity<StudentDto> saveStudent(@PathVariable("idUserAccount") int idUserAccount, @Valid @RequestBody StudentDto studentDto){
         System.out.println(studentDto.getCNP());
         System.out.println(studentDto.getFirstName());
         System.out.println(studentDto.getLastName());

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +27,8 @@ public class UserAccountDto {
     private String token;
 
     private Set<String> roles;
+
+    private LocalDateTime createdAt;
 
     public UserAccountDto(String token, Integer idUserAccount, String username, String email, List<String> roles) {
     }
