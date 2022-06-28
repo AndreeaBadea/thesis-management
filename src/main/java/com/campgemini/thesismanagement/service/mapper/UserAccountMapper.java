@@ -16,6 +16,8 @@ public class UserAccountMapper {
         userAccountDto.setPassword(userAccount.getPassword());
         userAccountDto.setEmail(userAccount.getEmail());
         userAccountDto.setRoles(UserAccount.getRoles(userAccount));
+        userAccountDto.setFirstLoginFlag(userAccount.getFirstLoginFlag());
+       // userAccountDto.setFirstLoginFlag(1);
         return userAccountDto;
     }
 
@@ -26,6 +28,8 @@ public class UserAccountMapper {
         userAccount.setPassword(userAccount.getPassword());
         userAccount.setEmail(userAccount.getEmail());
         userAccount.setRoles(userAccount.getRoles());
+        userAccount.setFirstLoginFlag(userAccountDto.getFirstLoginFlag());
+        userAccount.setFirstLoginFlag(1);
         return userAccount;
     }
 

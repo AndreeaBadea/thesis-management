@@ -47,6 +47,9 @@ public class UserAccount {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "first_login_flag")
+    private int firstLoginFlag;
+
     public UserAccount(String username, String email, String encode) {
     }
 

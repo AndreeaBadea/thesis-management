@@ -38,6 +38,10 @@ public class UserAccountController {
     @Autowired
     private UserDetailsServiceImplementation userDetailsServiceImplementation;
 
+    @Autowired
+    private UserAccountRepository userAccountRepository;
+
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticateUser(@RequestBody AuthRequest authenticationRequest){
@@ -52,7 +56,7 @@ public class UserAccountController {
 
           UserDetailsImplementation userDetails = (UserDetailsImplementation) authentication.getPrincipal();
         //  List<String> roles = UserDetailsImplementation.authoritiesToRolesList(userDetails);
-
+          //userDetails.setFirstLoginFlag(0);
           UserAccountDto userAccountDto = new UserAccountDto();
           userAccountDto.setIdUserAccount(userDetails.getIdUserAccount());
           userAccountDto.setUsername(userDetails.getUsername());
@@ -60,6 +64,9 @@ public class UserAccountController {
           userAccountDto.setEmail(userDetails.getEmail());
           userAccountDto.setRoles(UserDetailsImplementation.authoritiesToRolesList(userDetails));
           userAccountDto.setToken(token);
+          userAccountDto.setFirstLoginFlag(userDetails.getFirstLoginFlag());
+          userAccountDto.setCreatedAt(userDetails.getCreatedAt());
+          userAccountRepository.getByIdUserAccount(userDetails.getIdUserAccount()).setFirstLoginFlag(0);
           return ResponseEntity.ok(userAccountDto);
         }
 

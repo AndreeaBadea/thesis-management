@@ -60,7 +60,6 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
         userAccount.setUsername(userAccountDto.getUsername());
         userAccount.setEmail(userAccountDto.getEmail());
         userAccount.setPassword(passwordEncoder.encode(userAccountDto.getPassword()));
-
         Set<String> roleSet = userAccountDto.getRoles();
 
         Role defaultRole = roleRepository.findByRoleName(EnumRole.ROLE_USER);
@@ -91,6 +90,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 
         userAccount.setRoles(roles);
         userAccount.setCreatedAt(LocalDateTime.now());
+        userAccount.setFirstLoginFlag(1);
         userAccountRepository.save((userAccount));
         Logger.info("User registered successfully!");
         return UserAccountMapper.userAccountToUserAccountDto(userAccount);

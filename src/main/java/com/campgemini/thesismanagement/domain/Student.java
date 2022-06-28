@@ -1,15 +1,10 @@
 package com.campgemini.thesismanagement.domain;
 
-import com.campgemini.thesismanagement.domain.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.Email;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor

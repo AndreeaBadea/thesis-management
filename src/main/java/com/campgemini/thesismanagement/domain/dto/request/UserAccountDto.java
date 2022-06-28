@@ -30,6 +30,6 @@ public class UserAccountDto {
 
     private LocalDateTime createdAt;
 
-    public UserAccountDto(String token, Integer idUserAccount, String username, String email, List<String> roles) {
-    }
+    private int firstLoginFlag;
+
 }

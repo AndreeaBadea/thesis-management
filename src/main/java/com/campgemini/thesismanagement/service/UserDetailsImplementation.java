@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -29,15 +30,22 @@ public class UserDetailsImplementation implements UserDetails {
     @JsonIgnore
     private String password;
 
+    private LocalDateTime createdAt;
+
+    private int firstLoginFlag;
+
     private Collection<? extends GrantedAuthority> authorities;
 
 
-    public UserDetailsImplementation(Integer idUserAccount, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImplementation(Integer idUserAccount, String username, String email, String password, Collection<? extends GrantedAuthority> authorities,
+                                     LocalDateTime createdAt, int firstLoginFlag) {
         this.idUserAccount = idUserAccount;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.createdAt = createdAt;
+        this.firstLoginFlag = firstLoginFlag;
     }
 
 
@@ -51,7 +59,9 @@ public class UserDetailsImplementation implements UserDetails {
                 userAccount.getUsername(),
                 userAccount.getEmail(),
                 userAccount.getPassword(),
-                authorities);
+                authorities,
+                userAccount.getCreatedAt(),
+                userAccount.getFirstLoginFlag());
     }
 
     @Override
