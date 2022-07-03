@@ -3,6 +3,7 @@ package com.campgemini.thesismanagement.service;
 import com.campgemini.thesismanagement.domain.Student;
 import com.campgemini.thesismanagement.domain.StudentDetailsDto;
 import com.campgemini.thesismanagement.domain.StudentProject;
+import com.campgemini.thesismanagement.domain.UserAccount;
 import com.campgemini.thesismanagement.domain.dto.StudentDto;
 import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
 import com.campgemini.thesismanagement.repository.ProjectRepository;
@@ -59,6 +60,9 @@ public class StudentService {
         studentDto.setUserAccount(userAccountRepository.getByIdUserAccount(idUserAccount));
         studentDto.setIdUserAccount(idUserAccount);
         Student student = studentRepository.save(StudentMapper.studentDtoToStudent(studentDto));
+        UserAccount userAccount = userAccountRepository.getByIdUserAccount(idUserAccount);
+        userAccount.setFirstLoginFlag(0);
+        userAccountRepository.save(userAccount); 
         return StudentMapper.studentToStudentDto(student);
     }
 

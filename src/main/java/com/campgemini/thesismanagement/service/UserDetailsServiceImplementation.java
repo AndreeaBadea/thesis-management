@@ -17,6 +17,7 @@ import org.tinylog.Logger;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -95,7 +96,5 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
         Logger.info("User registered successfully!");
         return UserAccountMapper.userAccountToUserAccountDto(userAccount);
     }
-
-
 
 }

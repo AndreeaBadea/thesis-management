@@ -66,7 +66,7 @@ public class UserAccountController {
           userAccountDto.setToken(token);
           userAccountDto.setFirstLoginFlag(userDetails.getFirstLoginFlag());
           userAccountDto.setCreatedAt(userDetails.getCreatedAt());
-          userAccountRepository.getByIdUserAccount(userDetails.getIdUserAccount()).setFirstLoginFlag(0);
+        //  userAccountRepository.getByIdUserAccount(userDetails.getIdUserAccount()).setFirstLoginFlag(0);
           return ResponseEntity.ok(userAccountDto);
         }
 
@@ -82,9 +82,9 @@ public class UserAccountController {
       return new ResponseEntity<>(userDetailsServiceImplementation.addUserAccount(userAccountDto),
                             HttpStatus.CREATED)
               ;
-
-
     }
+
+
 
 }
 

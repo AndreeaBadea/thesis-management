@@ -1,12 +1,15 @@
 package com.campgemini.thesismanagement.service;
 
 import com.campgemini.thesismanagement.domain.Project;
+import com.campgemini.thesismanagement.domain.StudentProject;
 import com.campgemini.thesismanagement.domain.dto.ProjectDto;
+import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
 import com.campgemini.thesismanagement.repository.ProjectRepository;
 import com.campgemini.thesismanagement.repository.StudentProjectRepository;
 import com.campgemini.thesismanagement.repository.StudentRepository;
 import com.campgemini.thesismanagement.repository.TeacherRepository;
 import com.campgemini.thesismanagement.service.mapper.ProjectMapper;
+import com.campgemini.thesismanagement.service.mapper.StudentProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,11 +50,11 @@ public class ProjectService {
         return ProjectMapper.projectToProjectDto(projectRepository.getById(id));
     }
 
-    public ProjectDto addProject(ProjectDto projectDto){
-      //  projectDto.setTeacher(teacherRepository.getById(projectDto.getIdTeacher()));
-       // projectDto.setStudentProject(studentProjectRepository.getById(projectDto.getIdStudentProject()));
-        Project project = projectRepository.save(ProjectMapper.projectDtoToProject(projectDto));
-        return ProjectMapper.projectToProjectDto(project);
+    public List<StudentProjectDto> getAllAllocatedProjects(){
+        return studentProjectRepository.findAll()
+                .stream()
+                .map(StudentProjectMapper::toStudentProjectDto)
+                .collect(Collectors.toList());
     }
 
 

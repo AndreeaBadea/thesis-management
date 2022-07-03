@@ -36,9 +36,6 @@ public class StudentController {
 
     @PostMapping("/{idUserAccount}")
     public ResponseEntity<StudentDto> saveStudent(@PathVariable("idUserAccount") int idUserAccount, @Valid @RequestBody StudentDto studentDto){
-        System.out.println(studentDto.getCNP());
-        System.out.println(studentDto.getFirstName());
-        System.out.println(studentDto.getLastName());
         return new ResponseEntity<>(studentService.addStudent(idUserAccount, studentDto), HttpStatus.CREATED);
     }
 

@@ -22,7 +22,7 @@ public class Teacher {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user_account")
-    private UserAccount id_user_account;
+    private UserAccount idUserAccount;
 
     @Column(name = "first_name")
     private String firstName;
@@ -39,4 +39,9 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Project> projectsList;
+
+    public void setIdForUserAccount(Integer id){
+        idUserAccount.setIdUserAccount(id);
+    }
 }
+

@@ -2,10 +2,12 @@ package com.campgemini.thesismanagement.service;
 
 import com.campgemini.thesismanagement.domain.Project;
 import com.campgemini.thesismanagement.domain.Teacher;
+import com.campgemini.thesismanagement.domain.UserAccount;
 import com.campgemini.thesismanagement.domain.dto.ProjectDto;
 import com.campgemini.thesismanagement.domain.dto.TeacherDto;
 import com.campgemini.thesismanagement.repository.ProjectRepository;
 import com.campgemini.thesismanagement.repository.TeacherRepository;
+import com.campgemini.thesismanagement.repository.UserAccountRepository;
 import com.campgemini.thesismanagement.service.mapper.ProjectMapper;
 import com.campgemini.thesismanagement.service.mapper.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.tinylog.Logger;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +28,16 @@ public class TeacherService {
     private final ProjectRepository projectRepository;
 
     @Autowired
+    private final UserAccountRepository userAccountRepository;
+
+    @Autowired
     private final ProjectService projectService;
 
 
-    public TeacherService(TeacherRepository teacherRepository, ProjectRepository projectRepository, ProjectService projectService) {
+    public TeacherService(TeacherRepository teacherRepository, ProjectRepository projectRepository, UserAccountRepository userAccountRepository, ProjectService projectService) {
         this.teacherRepository = teacherRepository;
         this.projectRepository = projectRepository;
+        this.userAccountRepository = userAccountRepository;
         this.projectService = projectService;
     }
 
@@ -45,13 +52,19 @@ public class TeacherService {
         return TeacherMapper.teacherToTeacherDto(teacherRepository.getById(id));
     }
 
-    public TeacherDto addTeacher(TeacherDto teacherDto){
+    public TeacherDto addTeacher(Integer idUserAccount, TeacherDto teacherDto){
+        teacherDto.setUserAccount(userAccountRepository.getByIdUserAccount(idUserAccount));
+        teacherDto.setIdUserAccount(idUserAccount);
         Teacher teacher = teacherRepository.save(TeacherMapper.teacherDtoToTeacher(teacherDto));
+        UserAccount userAccount = userAccountRepository.getByIdUserAccount(idUserAccount);
+        userAccount.setFirstLoginFlag(0);
+        userAccountRepository.save(userAccount);
         Logger.info("Teacher id {} added to database.", teacher.getIdTeacher());
         return TeacherMapper.teacherToTeacherDto(teacher);
     }
 
     public ProjectDto addTeacherProject(Integer idTeacher, ProjectDto projectDto){
+        System.out.println("in metoda addTeacherProject");
         projectDto.setTeacher(teacherRepository.getById(idTeacher));
         projectDto.setIdTeacher(idTeacher);
         Project project = projectRepository.save(ProjectMapper.projectDtoToProject(projectDto));
@@ -77,6 +90,23 @@ public class TeacherService {
         Project newProject = projectRepository.save(existingProject);
         Logger.info("Project id {} updated.", idProject);
         return ProjectMapper.projectToProjectDto(newProject);
+    }
+
+
+    public TeacherDto findTeacherByIdUserAccount(Integer idUserAccount){  // gaseste o solutie mai buna!!
+        List<Teacher> teachersList = teacherRepository.findAll();
+        for(Teacher teacher : teachersList){
+            if(Objects.equals(teacher.getIdUserAccount().getIdUserAccount(), idUserAccount)){
+                return TeacherMapper.teacherToTeacherDto(teacher);
+            }
+        }
+        return null;
+    }
+
+    public void deleteTeacherProjectById(Integer idProject){
+//        Teacher teacher = teacherRepository.getById(idTeacher);
+//        teacher.getProjectsList().remove(idProject);
+        projectRepository.delete(projectRepository.getById(idProject));
     }
 
 

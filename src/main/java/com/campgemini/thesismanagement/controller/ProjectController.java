@@ -1,6 +1,7 @@
 package com.campgemini.thesismanagement.controller;
 
 import com.campgemini.thesismanagement.domain.dto.ProjectDto;
+import com.campgemini.thesismanagement.domain.dto.StudentProjectDto;
 import com.campgemini.thesismanagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(value ="http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/projects")
 public class ProjectController {
 
@@ -31,8 +33,8 @@ public class ProjectController {
         return new ResponseEntity<>(projectService.findProjectById(id), HttpStatus.OK);
     }
 
-//    @PostMapping()
-//    public ResponseEntity<ProjectDto> saveProject(@Valid ProjectDto projectDto){
-//        return new ResponseEntity<>(projectService.addProject(projectDto), HttpStatus.CREATED);
-//    }
+    @GetMapping("/allocated")
+    public ResponseEntity<List<StudentProjectDto>> getAllAllocatedProjects(){
+        return new ResponseEntity<>(projectService.getAllAllocatedProjects(), HttpStatus.OK);
+    }
 }
