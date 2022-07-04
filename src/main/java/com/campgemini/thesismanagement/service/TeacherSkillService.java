@@ -1,11 +1,9 @@
 package com.campgemini.thesismanagement.service;
 
-import com.campgemini.thesismanagement.domain.Teacher;
 import com.campgemini.thesismanagement.domain.TeacherSkill;
 import com.campgemini.thesismanagement.domain.dto.TeacherSkillDto;
 import com.campgemini.thesismanagement.repository.TeacherRepository;
 import com.campgemini.thesismanagement.repository.TeacherSkillRepository;
-import com.campgemini.thesismanagement.service.mapper.TeacherMapper;
 import com.campgemini.thesismanagement.service.mapper.TeacherSkillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,6 @@ import org.tinylog.Logger;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class TeacherSkillService {

@@ -27,6 +27,8 @@ public class ProjectDto {
 
     private Integer idTeacher;
 
+    private String teacherName;
+
     private String projectTitle;
 
     private String projectDescription;

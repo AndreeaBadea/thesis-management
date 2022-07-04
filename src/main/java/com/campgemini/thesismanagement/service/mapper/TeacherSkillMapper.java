@@ -14,14 +14,14 @@ public class TeacherSkillMapper {
         return teacherSkillDto;
     }
 
-    public static TeacherSkill teacherSkillDtoToTeacherSkill(TeacherSkillDto teacherSkillDto){
-        TeacherSkill teacherSkill = new TeacherSkill();
-        teacherSkill.setIdTeachersSkills(teacherSkillDto.getIdTeachersSkills());
-        teacherSkill.setIdTeacher(teacherSkill.getIdTeacher());
-        teacherSkill.setSkillsName(teacherSkillDto.getSkillsName());
-        teacherSkill.setTeachingSubjects(teacherSkillDto.getTeachingSubjects());
-        return teacherSkill;
-    }
+//    public static TeacherSkill teacherSkillDtoToTeacherSkill(TeacherSkillDto teacherSkillDto){
+//        TeacherSkill teacherSkill = new TeacherSkill();
+//        teacherSkill.setIdTeachersSkills(teacherSkillDto.getIdTeachersSkills());
+//        teacherSkill.setIdTeacher(teacherSkillDto.getIdTeacher());
+//        teacherSkill.setSkillsName(teacherSkillDto.getSkillsName());
+//        teacherSkill.setTeachingSubjects(teacherSkillDto.getTeachingSubjects());
+//        return teacherSkill;
+//    }
 
 
 }

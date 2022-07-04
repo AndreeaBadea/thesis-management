@@ -3,6 +3,8 @@ package com.campgemini.thesismanagement.service.mapper;
 import com.campgemini.thesismanagement.domain.Project;
 import com.campgemini.thesismanagement.domain.dto.ProjectDto;
 
+import java.util.Locale;
+
 public class ProjectMapper {
 
     public static ProjectDto projectToProjectDto(Project project){
@@ -12,9 +14,10 @@ public class ProjectMapper {
       //  projectDto.setIdStudentProject(project.getStudentProject().getIdStudentProject());
         projectDto.setTeacher(project.getTeacher());
         projectDto.setIdTeacher(project.getTeacher().getIdTeacher());
+        projectDto.setTeacherName(project.getTeacher().getFirstName() + " " + project.getTeacher().getLastName());
         projectDto.setProjectTitle(project.getProjectTitle());
         projectDto.setProjectDescription(project.getProjectDescription());
-        projectDto.setProjectAvailability(project.getProjectAvailability());
+        projectDto.setProjectAvailability(project.getProjectAvailability().toUpperCase(Locale.ROOT));
         return projectDto;
     }
 

@@ -66,7 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         "/admin/users",
                         "/projects/allocated",
                         "/admin/{idUserAccount}/role/admin",
-                        "/admin/{idUserAccount}/role/teacher"
+                        "/admin/{idUserAccount}/role/teacher",
+                        "/students/{id}",
+                        "/students/{idStudent}/skills",
+                        "/students/{idStudent}/skills/{idStudentSkill}",
+                        "/students//{idStudent}/projects/request"
                 )
                 .permitAll()
                 .anyRequest().authenticated().and()

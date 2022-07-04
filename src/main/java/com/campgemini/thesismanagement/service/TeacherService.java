@@ -104,8 +104,6 @@ public class TeacherService {
     }
 
     public void deleteTeacherProjectById(Integer idProject){
-//        Teacher teacher = teacherRepository.getById(idTeacher);
-//        teacher.getProjectsList().remove(idProject);
         projectRepository.delete(projectRepository.getById(idProject));
     }
 

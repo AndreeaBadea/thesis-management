@@ -3,7 +3,6 @@ package com.campgemini.thesismanagement.controller;
 import com.campgemini.thesismanagement.domain.dto.ProjectDto;
 import com.campgemini.thesismanagement.domain.dto.TeacherDto;
 import com.campgemini.thesismanagement.domain.dto.TeacherSkillDto;
-import com.campgemini.thesismanagement.domain.dto.response.MessageResponse;
 import com.campgemini.thesismanagement.service.TeacherService;
 import com.campgemini.thesismanagement.service.TeacherSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
